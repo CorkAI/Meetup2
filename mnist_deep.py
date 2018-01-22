@@ -173,9 +173,10 @@ def main(_):
     accuracy = tf.reduce_mean(correct_prediction)
 
     # If pre-trained model exists on disk, then just load that
-    if os.path.isfile(os.path.join(os.getcwd(), 'saved_model/cork_ai_model_deep.ckpt.index')):
-        model_saver.restore(sess, "saved_model/cork_ai_model_deep.ckpt")
-        print("Model restored from disk")
+    if False:#os.path.isfile(os.path.join(os.getcwd(), 'saved_model/cork_ai_model_deep.ckpt.index')):
+        pass
+        #model_saver.restore(sess, "saved_model/cork_ai_model_deep.ckpt")
+        #print("Model restored from disk")
 
     # If no trained model on disk, then train it now:
     else:
