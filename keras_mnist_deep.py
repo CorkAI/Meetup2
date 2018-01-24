@@ -44,6 +44,19 @@ from tensorflow.python.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense,
 FLAGS = None
 
 
+# build a model using keras
+def deepnn_keras(model_input_shape):
+    my_model = Sequential()
+    my_model.add(Conv2D(input_shape=model_input_shape, kernel_size=(5, 5), filters=32, padding="same", activation="relu"))
+    my_model.add(MaxPooling2D())
+    my_model.add(Conv2D(kernel_size=(5, 5), filters=64, padding="same", activation="relu"))
+    my_model.add(Flatten())
+    my_model.add(Dense(units=1024, activation="relu"))
+    my_model.add(Dropout(0.5))
+    my_model.add(Dense(10, activation='softmax'))
+    return my_model
+
+
 def main(_):
     # Import data
     mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
@@ -55,21 +68,14 @@ def main(_):
         my_model = load_model("saved_model/cork_ai_model_keras_deep.h5")
         print("Model restored from disk")
 
-    # Build a model using keras
+    # Build and train a model using keras
     else:
-        my_model.add(Conv2D(input_shape=(28, 28, 1), kernel_size=(5, 5), filters=32, padding="same", activation="relu"))
-        my_model.add(MaxPooling2D())
-        my_model.add(Conv2D(kernel_size=(5, 5), filters=64, padding="same", activation="relu"))
-        my_model.add(Flatten())
-        my_model.add(Dense(units=1024, activation="relu"))
-        my_model.add(Dropout(0.5))
-        my_model.add(Dense(10, activation='softmax'))
-
+        my_model = deepnn_keras(input_shape=(28, 28, 1))
         my_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
         train_images = np.reshape(mnist.train.images, [-1, 28, 28, 1])
         print("train set shape is ", train_images.shape)
         print("train labels shape is ", mnist.train.labels.shape)
-
         my_model.fit(train_images, mnist.train.labels, epochs=18, batch_size=50)
         my_model.save("saved_model/cork_ai_model_keras_deep.h5")
 
