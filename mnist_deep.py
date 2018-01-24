@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+# A copy of the version from Meetup1
 
 """A deep MNIST classifier using convolutional layers.
 
