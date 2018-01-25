@@ -70,12 +70,12 @@ Images 4.jpg 5.jpg and 6.jpg are created digitally using a 28x28 black backgroun
 Have a look at the images and see how closely they resemble the MNIST data (samples in your output_images folder if you have done previous additional exercises).
 Now test your trained convolutional network on these images using the following commands
  - ```pip install pillow``` *(install the python image library, pillow, needed to read the images)*
- - ```python mnist_deep.py --extra_test_imgs 1```
+ - ```python keras_mnist_deep.py --extra_test_imgs 1```
 Output files are written in folder output_images with filename extraID_[pred] where ID is the original image name and pred is the digit assigned by the convolutional network. Use scp to copy the output images to your local machine for inspection (see earlier Additional Exercise 1 for scp instructions). How well did the network do?! Can you speculate what caused the failures?
 
 *Additional Exercise 2:*  Run the convolutional network on the Fashion MNIST data. Note that you will have to re-train using the fashion data, so first delete or rename the saved_model folder which contains the network trained on MNIST digit data.
   - ```mv saved_model/ saved_model_digits/``` *(rename the saved_model folder to saved_model_digits)*
-  - ```python mnist_deep.py --data_dir data/fashion --write_samples 1``` *(retrain and test using fashion data)*
+  - ```python keras_mnist_deep.py --data_dir data/fashion --write_samples 1``` *(retrain and test using fashion data)*
 The accuracy on the fashion dataset should be significantly higher with the convolutional network than with the earlier one.  Sample output files are in the output_images folder with the prefix 'fashion_deep'.
 
 #### 5: Ending your AWS session
