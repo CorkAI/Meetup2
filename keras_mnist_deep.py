@@ -73,7 +73,7 @@ def main(_):
 
     # Build and train a model using keras
     else:
-        my_model = deepnn_keras(input_shape=(28, 28, 1))
+        my_model = deepnn_keras(model_input_shape=(28, 28, 1))
         my_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
         train_images = np.reshape(mnist.train.images, [-1, 28, 28, 1])
