@@ -84,46 +84,49 @@ def main(_):
 
     test_images = np.reshape(mnist.test.images, [-1, 28, 28, 1])
     metrics = my_model.evaluate(test_images, mnist.test.labels, batch_size=50)
-    print('\n\ntest loss, accuracy : ', metrics)
+    print('\n\nmnist test loss, accuracy : ', metrics)
 
     # Test on individual test examples, writing examples of 
     # successful and failed classifications to disk
     if FLAGS.write_samples:
+        print('Will write sample outputs to output_images folder')
         file_prefix = ''
         if 'fashion' in FLAGS.data_dir:
+            print('Using fashion data')
             file_prefix = 'fashion_deep_'
-            if not os.path.exists(os.path.join(os.getcwd(), 'output_images')):
-                os.makedirs(os.path.join(os.getcwd(), 'output_images'))
-            num_each_to_store = 5
-            stored_correct = 0
-            stored_incorrect = 0
-            idx = 0
-            while (stored_correct < num_each_to_store or stored_incorrect < num_each_to_store) and idx < len(mnist.test.images):
-                pred = np.argmax(my_model.predict(np.reshape(mnist.test.images[idx], [-1, 28, 28, 1])))
-                real_label = np.argmax(mnist.test.labels[idx])
-                correct = pred == real_label
+        if not os.path.exists(os.path.join(os.getcwd(), 'output_images')):
+            os.makedirs(os.path.join(os.getcwd(), 'output_images'))
+        num_each_to_store = 5
+        stored_correct = 0
+        stored_incorrect = 0
+        idx = 0
+        while (stored_correct < num_each_to_store or stored_incorrect < num_each_to_store) and idx < len(mnist.test.images):
+            pred = np.argmax(my_model.predict(np.reshape(mnist.test.images[idx], [-1, 28, 28, 1])))
+            real_label = np.argmax(mnist.test.labels[idx])
+            correct = pred == real_label
 
-                if file_prefix is 'fashion_deep_':
-                    real_label = fashion_label_to_name(real_label)
-                    pred = '[' + fashion_label_to_name(pred) + ']'
-                else:
-                    real_label = real_label.astype(str)
-                    pred = pred.astype(str)
+            if file_prefix is 'fashion_deep_':
+                real_label = fashion_label_to_name(real_label)
+                pred = '[' + fashion_label_to_name(pred) + ']'
+            else:
+                real_label = real_label.astype(str)
+                pred = pred.astype(str)
 
-                img = np.reshape(mnist.test.images[idx], [28, 28])
-                plt.imshow(img, cmap='gray')
+            img = np.reshape(mnist.test.images[idx], [28, 28])
+            plt.imshow(img, cmap='gray')
 
-                if correct and stored_correct < num_each_to_store:
-                    stored_correct += 1
-                    plt.savefig("output_images/{}success_{}.png".format(file_prefix, real_label))
-                elif not correct and stored_incorrect < num_each_to_store:
-                    stored_incorrect += 1
-                    plt.savefig("output_images/{}fail_{}_{}.png".format(file_prefix, real_label, pred))
-                idx += 1
+            if correct and stored_correct < num_each_to_store:
+                stored_correct += 1
+                plt.savefig("output_images/{}success_{}.png".format(file_prefix, real_label))
+            elif not correct and stored_incorrect < num_each_to_store:
+                stored_incorrect += 1
+                plt.savefig("output_images/{}fail_{}_{}.png".format(file_prefix, real_label, pred))
+            idx += 1
 
     # Test on extra test images made from photos of handwritten digits
     # or from digitally created 'hand' written digits
     if FLAGS.extra_test_imgs:
+        print('Using manually hand-written digits')
         if not os.path.exists(os.path.join(os.getcwd(), 'output_images')):
             os.makedirs(os.path.join(os.getcwd(), 'output_images'))
         file_prefix = 'extra_'
