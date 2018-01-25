@@ -31,14 +31,13 @@
 Now you should be logged into the machine and see a command-line prompt $.
 
 #### 2: Review of convolutional neural network from last week
-(Recap slides at http://slides.com/keelinm/recap-on-deep-learning)  
 **Folder setup**
  Type the following commands to get setup for running the code:
  - ```mkdir cork_ai```   *(make a new folder to work in)*
  - ```cd cork_ai```         *(switch to the newly created folder)*
  - ```git clone https://github.com/CorkAI/Meetup2.git```  *(this will make a Meetup2 folder with all the code/data we need)*
  - ```cd Meetup2```     *(switch to the Meetup2 folder)*
- - Let's walk through the tensorflow code for last weeks convolutional network, type ```vim mnist_deep.py```
+ - To have a look at the tensorflow code, type ```vim mnist_deep.py```
     - (Type Esc then : then q! and hit enter to exit the file)  
 
 **Launch conda environment**
