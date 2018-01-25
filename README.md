@@ -71,12 +71,22 @@ Have a look at the images and see how closely they resemble the MNIST data (samp
 Now test your trained convolutional network on these images using the following commands
  - ```pip install pillow``` *(install the python image library, pillow, needed to read the images)*
  - ```python keras_mnist_deep.py --extra_test_imgs 1```
-Output files are written in folder output_images with filename extraID_[pred] where ID is the original image name and pred is the digit assigned by the convolutional network. Use scp to copy the output images to your local machine for inspection (see earlier Additional Exercise 1 for scp instructions). How well did the network do?! Can you speculate what caused the failures?
+Output files are written in folder output_images with filename extraID_[pred] where ID is the original image name and pred is the digit assigned by the convolutional network. 
+ - Use scp to copy the output images to your local machine for inspection:
+ 	- (linux, mac, cygwin): open a new shell on your local machine and create a fresh empty directory. Then copy the output images to your local system:
+		- ```mkdir output_images```
+		- ```cd output_images```
+		- ```scp -i /path/my-key-pair.pem ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup2/output_images/* .```
+		- View the images using Finder / Explorer or your preferred image viewer.
+	- (putty on Windows): Open a command line prompt (cmd)
+		- ```pscp -i C:\path\my-key-pair.ppk ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup2/output_images/* c:\[my_local_directory]```
+		- View the images using your preferred image viewer
 
 *Additional Exercise 2:*  Run the convolutional network on the Fashion MNIST data. Note that you will have to re-train using the fashion data, so first delete or rename the saved_model folder which contains the network trained on MNIST digit data.
   - ```mv saved_model/ saved_model_digits/``` *(rename the saved_model folder to saved_model_digits)*
   - ```python keras_mnist_deep.py --data_dir data/fashion --write_samples 1``` *(retrain and test using fashion data)*
-The accuracy on the fashion dataset should be significantly higher with the convolutional network than with the earlier one.  Sample output files are in the output_images folder with the prefix 'fashion_deep'.
+The accuracy on the fashion dataset should be significantly lower than on the mnist one since the data is more difficult.  Sample output files are in the output_images folder with the prefix 'fashion_deep'.
+
 
 #### 5: Ending your AWS session
 When you are finished working on AWS you need to stop (or terminate) your AWS instance to discontinue usage charges.
