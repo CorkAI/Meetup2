@@ -83,8 +83,8 @@ def main(_):
         my_model.save("saved_model/cork_ai_model_keras_deep.h5")
 
     test_images = np.reshape(mnist.test.images, [-1, 28, 28, 1])
-    accuracy_test = my_model.evaluate(test_images, mnist.test.labels, batch_size=50)
-    print('\n\ntest accuracy is ', accuracy_test)
+    metrics = my_model.evaluate(test_images, mnist.test.labels, batch_size=50)
+    print('\n\ntest loss, accuracy : ', metrics)
 
     # Test on individual test examples, writing examples of 
     # successful and failed classifications to disk
