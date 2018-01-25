@@ -62,6 +62,7 @@ def deepnn_keras(model_input_shape):
 
 def main(_):
     # Import data
+    print('Reading in data from  ', FLAGS.data_dir)
     mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
 
     my_model = Sequential()
@@ -88,7 +89,7 @@ def main(_):
 
     test_images = np.reshape(mnist.test.images, [-1, 28, 28, 1])
     metrics = my_model.evaluate(test_images, mnist.test.labels, batch_size=50)
-    print('\n\nmnist test loss, accuracy : ', metrics)
+    print('\n\nevaluation test: loss, accuracy : ', metrics)
 
     # Test on individual test examples, writing examples of 
     # successful and failed classifications to disk
