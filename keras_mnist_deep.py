@@ -80,6 +80,10 @@ def main(_):
         print("train set shape is ", train_images.shape)
         print("train labels shape is ", mnist.train.labels.shape)
         my_model.fit(train_images, mnist.train.labels, epochs=18, batch_size=50)
+
+        # model is trained, let's save it to disk
+        if not os.path.exists(os.path.join(os.getcwd(), 'saved_model')):
+            os.makedirs(os.path.join(os.getcwd(), 'saved_model'))
         my_model.save("saved_model/cork_ai_model_keras_deep.h5")
 
     test_images = np.reshape(mnist.test.images, [-1, 28, 28, 1])
